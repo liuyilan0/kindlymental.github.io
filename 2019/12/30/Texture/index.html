@@ -87,7 +87,7 @@
 <meta property="og:description" content="Texture来源FlexBox布局 iOS 系统默认提供的布局方式有两种：一种是 Frame 这种原始方式，也就是通过设置横纵坐标和宽高来确定布局。另一种是自动布局（Auto Layout），相比较于 Frame 需要指出每个视图的精确位置，自动布局对于视图位置的描述更加简洁和易读，只需要确定两个视图之间的关系就能够确定布局。  前端技术栈的布局方式叫做FlexBox布局；苹果公司基于 Flex">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-12-30T06:38:20.191Z">
-<meta property="article:modified_time" content="2019-12-30T07:37:44.450Z">
+<meta property="article:modified_time" content="2019-12-30T07:41:08.366Z">
 <meta property="article:author" content="aliya">
 <meta name="twitter:card" content="summary">
 
@@ -310,9 +310,83 @@
 <p> Texture的基本单位就是node（节点）， ASDisplayNode可以看成是一个抽象UIView或者抽象的CALayer。不同点是nodes是线程安全的：可以在后台线程上并行实例化和配置它们的整个层次结构。</p>
 <p> Texture 几乎涵盖了常用的控件，下面是 Texture 和 UIKit 的对应关系。</p>
 <p><strong><em>Nodes</em></strong></p>
-<p>Texture|UIKit<br>–|:–:|–:<br>ASDisplayNode|UIView<br>ASCellNode|UITableViewCell/UICollectionViewCell<br>ASTextNode|UILabel<br>ASButtonNode|UIButton<br>ASImageNode|UIImageView<br>ASNetworkImageNode|UIImageView<br>ASMultiplexImageNode|UIImageView<br>ASVideoNode|AVPlayerLayer<br>ASControlNode|UIControl<br>ASScrollNode|UIScrollView<br>ASEditableTextNode|UITextView</p>
+<table>
+<thead>
+<tr>
+<th>Texture</th>
+<th align="center">UIKit</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ASDisplayNode</td>
+<td align="center">UIView</td>
+</tr>
+<tr>
+<td>ASCellNode</td>
+<td align="center">UITableViewCell/UICollectionViewCell</td>
+</tr>
+<tr>
+<td>ASTextNode</td>
+<td align="center">UILabel</td>
+</tr>
+<tr>
+<td>ASButtonNode</td>
+<td align="center">UIButton</td>
+</tr>
+<tr>
+<td>ASImageNode</td>
+<td align="center">UIImageView</td>
+</tr>
+<tr>
+<td>ASNetworkImageNode</td>
+<td align="center">UIImageView</td>
+</tr>
+<tr>
+<td>ASMultiplexImageNode</td>
+<td align="center">UIImageView</td>
+</tr>
+<tr>
+<td>ASVideoNode</td>
+<td align="center">AVPlayerLayer</td>
+</tr>
+<tr>
+<td>ASControlNode</td>
+<td align="center">UIControl</td>
+</tr>
+<tr>
+<td>ASScrollNode</td>
+<td align="center">UIScrollView</td>
+</tr>
+<tr>
+<td>ASEditableTextNode</td>
+<td align="center">UITextView</td>
+</tr>
+</tbody></table>
 <p><strong><em>Node Containers</em></strong></p>
-<p>Texture|UIKit<br>–|:–:|–:<br>ASViewController|UIViewController<br>ASCellNode|ASTableNode/UITableView<br>ASCollectionNode|UICollectionView<br>ASPagerNode|UICollectionVie</p>
+<table>
+<thead>
+<tr>
+<th>Texture</th>
+<th align="center">UIKit</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ASViewController</td>
+<td align="center">UIViewController</td>
+</tr>
+<tr>
+<td>ASCellNode</td>
+<td align="center">ASTableNode/UITableView</td>
+</tr>
+<tr>
+<td>ASCollectionNode</td>
+<td align="center">UICollectionView</td>
+</tr>
+<tr>
+<td>ASPagerNode</td>
+<td align="center">UICollectionVie</td>
+</tr>
+</tbody></table>
 <hr>
 <h4 id="布局思路"><a href="#布局思路" class="headerlink" title="布局思路"></a>布局思路</h4><p> Texture 框架的布局中，Texture 考虑到布局扩展性，提供了一个基类 ASLayoutSpec。这个基类 提供了布局的基本能力，使 Texture 可以通过它扩展实现多种布局思路，比如 Wrapper、Inset、Overlay、Ratio、Relative、Absolute 等布局思路，也可以继承 ASLayoutSpec 来自定义你的布局算法。</p>
 <p><strong>ASLayoutSpec子类</strong></p>
