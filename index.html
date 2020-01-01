@@ -385,7 +385,7 @@
 </tr>
 <tr>
 <td>ASPagerNode</td>
-<td align="center">UICollectionVie</td>
+<td align="center">UICollectionView</td>
 </tr>
 </tbody></table>
 <hr>
@@ -658,12 +658,20 @@
       
         
           
-            <h3 id="KVC"><a href="#KVC" class="headerlink" title="KVC"></a>KVC</h3><blockquote>
-<p>iOS13不支持使用KVC进行属性访问和设置了，需要修改为其它方式；</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nehelper sent invalid result code [1] for Wi-Fi information request</span><br></pre></td></tr></table></figure>
-
-<p><img src="http://n.sinaimg.cn/sina_vr/w1160h300/20171205/Vb25-fypikwt9464270.jpg" alt="PIC"></p>
+            <h3 id="KVC限制，私有API被封禁"><a href="#KVC限制，私有API被封禁" class="headerlink" title="KVC限制，私有API被封禁"></a>KVC限制，私有API被封禁</h3><p>iOS13不支持使用KVC进行属性访问和设置了，需要修改为其它方式；例如修改UITextField的内部信息时候，不能使用KVC修改，可通过属性字符串来修改；</p>
+<h3 id="黑暗模式"><a href="#黑暗模式" class="headerlink" title="黑暗模式"></a>黑暗模式</h3><p>iOS13推出了黑暗模式，如果不打算适配 Dark Mode，可以直接在 Info.plist 中添加一栏：User Interface Style : Light，即可在应用内禁用暗黑模式；</p>
+<h3 id="即将废弃的LaunchImage"><a href="#即将废弃的LaunchImage" class="headerlink" title="即将废弃的LaunchImage"></a>即将废弃的LaunchImage</h3><p>在iOS8的时候，苹果就引入了LaunchScreen来设置启动页；同样我们也可以使用LaunchImage，不过需要提供各种屏幕尺寸的启动页图片；而LaunchScreen支持AutoLayout+SizeClass，使用更加方便。不过从2020年4月开始，所有使用iOS13 SDK的APP将必须提供LaunchScreen；</p>
+<h3 id="presentViewController弹出方式和消失方式"><a href="#presentViewController弹出方式和消失方式" class="headerlink" title="presentViewController弹出方式和消失方式"></a>presentViewController弹出方式和消失方式</h3><p>iOS13会发现presentViewController的弹出方式不同，是因为<strong>modalPresentationStyle</strong>属性在之前默认是<strong>UIModalPresentationFullScreen</strong>，而iOS13改为<strong>UIModalPresentationAutomatic</strong>；<br>若想全屏展示，需手动修改弹出方式为<strong>UIModalPresentationFullScreen</strong>，且需要自己做适配：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UINavigationController *nav &#x3D; [[UINavigationController alloc] initWithRootViewController:vc];</span><br><span class="line">nav.modalPresentationStyle &#x3D; UIModalPresentationFullScreen;</span><br><span class="line">[self presentViewController:nav animated:YES completion:nil];</span><br></pre></td></tr></table></figure>
+<p>如果使用<strong>UIModalPresentationAutomatic</strong>为默认弹出方式，则弹窗的消失方式支持下滑消失，是因为UIViewController添加了modalInPresentation属性，默认为false，支持下滑消失，如果不想支持，需手动设置为true；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if (@available(iOS 13.0, *)) &#123;</span><br><span class="line">    self.modalInPresentation &#x3D; true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="UISegmentedControl样式"><a href="#UISegmentedControl样式" class="headerlink" title="UISegmentedControl样式"></a>UISegmentedControl样式</h3><p>UISegmentedControl默认样式为无色；</p>
+<h3 id="第三方登录"><a href="#第三方登录" class="headerlink" title="第三方登录"></a>第三方登录</h3><p>当 Sign In with Apple 服务正式上线以后，接入第三方登录的APP都需要接入苹果登录，且置于最前；</p>
+<h3 id="蓝牙权限申请"><a href="#蓝牙权限申请" class="headerlink" title="蓝牙权限申请"></a>蓝牙权限申请</h3><p>iOS13后需要在info.plist添加NSBluetoothAlwaysUsageDescription字段，说明使用目的；</p>
+<h3 id="UIWebView将被禁止提交审核"><a href="#UIWebView将被禁止提交审核" class="headerlink" title="UIWebView将被禁止提交审核"></a>UIWebView将被禁止提交审核</h3><p>在 iOS 13 推出后，苹果在 UIWebView 的说明上将其支持的系统范围定格在了 iOS 2 ~ iOS 12。修改方式：用 WKWebView 替代 UIWebView，确保所有 UIWebView 的 api 都要移除；</p>
+<h3 id="MPMoviePlayerController被废弃"><a href="#MPMoviePlayerController被废弃" class="headerlink" title="MPMoviePlayerController被废弃"></a>MPMoviePlayerController被废弃</h3><p>MPMoviePlayerController在iOS13被废弃，替代的是AVPlayerViewController；</p>
+<h3 id="UISearchDisplayController被废弃"><a href="#UISearchDisplayController被废弃" class="headerlink" title="UISearchDisplayController被废弃"></a>UISearchDisplayController被废弃</h3><p>解决方案：使用 UISearchController 替换 UISearchBar + UISearchDisplayController 的组合方案；</p>
+<p><a href="https://blog.csdn.net/qq_23091121/article/details/101023714" target="_blank" rel="noopener">参考资料</a></p>
 
           
         
@@ -911,7 +919,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
