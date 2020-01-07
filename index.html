@@ -229,6 +229,130 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/07/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E8%B8%A9%E5%9D%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="aliya">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="兜里没糖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/07/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E8%B8%A9%E5%9D%91/" itemprop="url">微信小程序开发踩坑</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-07T13:49:44+08:00">
+                2020-01-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Button设置宽高无效"><a href="#Button设置宽高无效" class="headerlink" title="Button设置宽高无效"></a>Button设置宽高无效</h3><p>app.json中默认有一个”style”: “v2”,去掉就好了</p>
+<h3 id="使用-Authorization-进行授权"><a href="#使用-Authorization-进行授权" class="headerlink" title="使用 Authorization 进行授权"></a>使用 Authorization 进行授权</h3><p>在做微信小程序时，需要使用 Authorization 进行授权，结果每次登录的时候都出现授权弹窗。<br>解决：使用Authorization 授权时，会将用户名和密码用 base64 进行编码然后放到 header 中传入后端代码，</p>
+<blockquote>
+<p>header: {<br>        ‘Content-Type’: ‘application/json’,<br>        ‘Authorization’: ‘Basic ‘ + base64Code,<br>      },<br>验证方式：在服务端也会有固定的用户名密码，与之比较，相同则身份通过，否则不通过才会出现授权弹窗。<br><a href="https://www.jianshu.com/p/499595423f95" target="_blank" rel="noopener">参考资料1</a></p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/30/Texture/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -672,7 +796,10 @@
 <h3 id="MPMoviePlayerController被废弃"><a href="#MPMoviePlayerController被废弃" class="headerlink" title="MPMoviePlayerController被废弃"></a>MPMoviePlayerController被废弃</h3><p>MPMoviePlayerController在iOS13被废弃，替代的是AVPlayerViewController；</p>
 <h3 id="UISearchDisplayController被废弃"><a href="#UISearchDisplayController被废弃" class="headerlink" title="UISearchDisplayController被废弃"></a>UISearchDisplayController被废弃</h3><p>解决方案：使用 UISearchController 替换 UISearchBar + UISearchDisplayController 的组合方案；</p>
 <p><a href="https://blog.csdn.net/qq_23091121/article/details/101023714" target="_blank" rel="noopener">参考资料1</a><br><a href="http://www.cocoachina.com/articles/83448" target="_blank" rel="noopener">参考资料2</a></p>
-<h3 id="升级到XCode10以后项目报错"><a href="#升级到XCode10以后项目报错" class="headerlink" title="升级到XCode10以后项目报错"></a>升级到XCode10以后项目报错</h3><h4 id="Xcode-10-Error-Multiple-commands-produce问题及解决方案"><a href="#Xcode-10-Error-Multiple-commands-produce问题及解决方案" class="headerlink" title="Xcode 10 Error:Multiple commands produce问题及解决方案"></a>Xcode 10 Error:Multiple commands produce问题及解决方案</h4><p>Xcode 10报错：在工程的配置中有非法的LICENSE和Info.plist。<br>解决方案：找到工程-&gt;主 Target -&gt;Build Phases-&gt;Copy Bundle Resources。删除非法的LICENSE和Info.plist配置，重新编译工程就可以了。<br><a href="https://blog.csdn.net/jia12216/article/details/90374534" target="_blank" rel="noopener">参考链接</a></p>
+<h3 id="升级XCode10以后项目报错"><a href="#升级XCode10以后项目报错" class="headerlink" title="升级XCode10以后项目报错"></a>升级XCode10以后项目报错</h3><h4 id="Xcode-10-Error-Multiple-commands-produce问题及解决方案"><a href="#Xcode-10-Error-Multiple-commands-produce问题及解决方案" class="headerlink" title="Xcode 10 Error:Multiple commands produce问题及解决方案"></a>Xcode 10 Error:Multiple commands produce问题及解决方案</h4><p>Xcode 10报错：在工程的配置中有非法的LICENSE和Info.plist。<br>解决方案：找到工程-&gt;主 Target -&gt;Build Phases-&gt;Copy Bundle Resources。删除非法的LICENSE和Info.plist配置，重新编译工程就可以了。<br><a href="https://blog.csdn.net/jia12216/article/details/90374534" target="_blank" rel="noopener">参考链接</a></p>
+<h4 id="XCode11-提示”String”-file-not-found之错误解决"><a href="#XCode11-提示”String”-file-not-found之错误解决" class="headerlink" title="XCode11 提示”String” file not found之错误解决"></a>XCode11 提示”String” file not found之错误解决</h4><blockquote>
+<p>#include <String>    //file not found<br><a href="https://blog.csdn.net/zzl819954692/article/details/97395553" target="_blank" rel="noopener">参考链接</a></p>
+</blockquote>
 
           
         
@@ -880,7 +1007,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
