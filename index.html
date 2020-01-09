@@ -303,7 +303,7 @@
             <h3 id="Button设置宽高无效"><a href="#Button设置宽高无效" class="headerlink" title="Button设置宽高无效"></a>Button设置宽高无效</h3><p>app.json中默认有一个”style”: “v2”,去掉就好了</p>
 <h3 id="使用-Authorization-进行授权"><a href="#使用-Authorization-进行授权" class="headerlink" title="使用 Authorization 进行授权"></a>使用 Authorization 进行授权</h3><p>在做微信小程序时，需要使用 Authorization 进行授权，结果每次登录的时候都出现授权弹窗。<br>解决：使用Authorization 授权时，会将用户名和密码用 base64 进行编码然后放到 header 中传入后端代码，</p>
 <blockquote>
-<p>header: {<br>        ‘Content-Type’: ‘application/json’,<br>        ‘Authorization’: ‘Basic ‘ + base64Code,<br>      },<br>验证方式：在服务端也会有固定的用户名密码，与之比较，相同则身份通过，否则不通过才会出现授权弹窗。<br><a href="https://www.jianshu.com/p/499595423f95" target="_blank" rel="noopener">参考资料1</a></p>
+<p>header: {<br>        ‘Content-Type’: ‘application/json’,<br>        ‘Authorization’: ‘Basic ‘ + base64Code,<br>      },<br>验证方式：在服务端也会有固定的用户名密码，与之比较，相同则身份通过，否则不通过才会出现授权弹窗。<br><a href="https://www.jianshu.com/p/499595423f95" target="_blank" rel="noopener">参考资料1</a><br><a href="https://www.cnblogs.com/Man-Dream-Necessary/p/8400376.html" target="_blank" rel="noopener">参考资料2</a></p>
 </blockquote>
 
           
@@ -662,6 +662,9 @@
 <p> <em>文件目录：<br> ~/Library/Group Containers/K36BKF7T3D.group.com.apple.configurator/Library/Caches/Assets/TemporaryItems/MobileApps/</em></p>
 <blockquote>
 <p><strong>Cartool工具</strong><br> <em><a href="https://github.com/yuedong56/Assets.carTool" target="_blank" rel="noopener">CarTool工具 解压Assets.car文件</a></em></p>
+</blockquote>
+<h3 id="书写规范"><a href="#书写规范" class="headerlink" title="书写规范"></a>书写规范</h3><h4 id="视图创建"><a href="#视图创建" class="headerlink" title="视图创建"></a>视图创建</h4><blockquote>
+<p><strong>xib里 file’s owner class 与 custom class 的区别</strong><br>xib文件本身可以看做是一个xml，app启动的时候会根据xml构造xib对应的界面及其控件，file’s owner 可以看做是xib对应的类，连接outlet控件需要设置；<br>custom class的作用：view本身是UIView, 在代码中使用时, 要使用指定的类型方法, 需要设置custom class为某类型；</p>
 </blockquote>
 
           

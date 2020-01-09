@@ -87,7 +87,7 @@
 <meta property="og:description" content="iOS项目创建项目配置 配置AppIcon和LaunchImage AppIcon: 生成器：App Icon Gear  LaunchScreen: 1.在LaunchScreen.storyboard中拖拽imageView并设置约束，取消勾选右侧Use as launch Screen。 2.置空路径Launch Screen File。 3.最后在工程 targets–Build Sett">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-12-30T04:29:58.875Z">
-<meta property="article:modified_time" content="2020-01-01T02:52:09.794Z">
+<meta property="article:modified_time" content="2020-01-09T03:47:40.937Z">
 <meta property="article:author" content="aliya">
 <meta name="twitter:card" content="summary">
 
@@ -317,6 +317,9 @@
 <blockquote>
 <p><strong>Cartool工具</strong><br> <em><a href="https://github.com/yuedong56/Assets.carTool" target="_blank" rel="noopener">CarTool工具 解压Assets.car文件</a></em></p>
 </blockquote>
+<h3 id="书写规范"><a href="#书写规范" class="headerlink" title="书写规范"></a>书写规范</h3><h4 id="视图创建"><a href="#视图创建" class="headerlink" title="视图创建"></a>视图创建</h4><blockquote>
+<p><strong>xib里 file’s owner class 与 custom class 的区别</strong><br>xib文件本身可以看做是一个xml，app启动的时候会根据xml构造xib对应的界面及其控件，file’s owner 可以看做是xib对应的类，连接outlet控件需要设置；<br>custom class的作用：view本身是UIView, 在代码中使用时, 要使用指定的类型方法, 需要设置custom class为某类型；</p>
+</blockquote>
 
       
     </div>
@@ -467,7 +470,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#iOS项目创建"><span class="nav-number">1.</span> <span class="nav-text">iOS项目创建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#项目配置"><span class="nav-number">1.1.</span> <span class="nav-text">项目配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置AppIcon和LaunchImage"><span class="nav-number">1.2.</span> <span class="nav-text">配置AppIcon和LaunchImage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取其他APP的图片"><span class="nav-number">1.3.</span> <span class="nav-text">获取其他APP的图片</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#iOS项目创建"><span class="nav-number">1.</span> <span class="nav-text">iOS项目创建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#项目配置"><span class="nav-number">1.1.</span> <span class="nav-text">项目配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置AppIcon和LaunchImage"><span class="nav-number">1.2.</span> <span class="nav-text">配置AppIcon和LaunchImage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取其他APP的图片"><span class="nav-number">1.3.</span> <span class="nav-text">获取其他APP的图片</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#书写规范"><span class="nav-number">2.</span> <span class="nav-text">书写规范</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#视图创建"><span class="nav-number">2.1.</span> <span class="nav-text">视图创建</span></a></li></ol></li></ol></div>
             
 
           </div>
