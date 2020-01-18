@@ -86,8 +86,8 @@
 <meta property="og:site_name" content="兜里没糖">
 <meta property="og:description" content="感想道阻且长，行则将至 心存敬畏之心，方能行有所止面试题 property的修饰符有哪些？并说明其区别？ atomic和nontomic的区别是什么？ iOS实现多线程的方式有哪些？举例说明。 dispatch的线程组使用过吗？怎么使用，有a、b、c、d 4个异步请求，如何判断a、b、c、d都完成执行？如果需要a、b、c、d顺序执行，该如何实现？ 在使用自动布局的时候有没有遇到过什么问题？ iOS">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2019-12-20T15:46:08.902Z">
-<meta property="article:modified_time" content="2020-01-12T13:39:26.243Z">
+<meta property="article:published_time" content="2019-12-20T15:46:08.000Z">
+<meta property="article:modified_time" content="2020-01-13T01:57:21.230Z">
 <meta property="article:author" content="aliya">
 <meta name="twitter:card" content="summary">
 
@@ -306,6 +306,9 @@
 <blockquote>
 <p> 关于 HTTP 请求 GET 和 POST 的区别是什么?<br>    如何把 NSArray 里的 NSNumber 对象以顺序或反序排序?<br>    iOS 开发中数据持久化的几种方式。<br>    描述 UITableView的单元格重用机制,以及如何使用。<br>    循环引用的产生原因,以及解决方法。<br>    NSTimer 使用时注意事项?<br>    在某个实例方法中，self.name = _name，name = _name 它们有区别吗，为什么？</p>
 </blockquote>
+<blockquote>
+<p>  了解GCD的信号量机制吗？</p>
+</blockquote>
 <h4 id="Property属性"><a href="#Property属性" class="headerlink" title="Property属性"></a>Property属性</h4><p>1、首先解释property，property是iOS用于定义属性，不需要手动编写访问方法，如果需要的话可以重写getter和setter方法；OC提供点语法来访问getter和setter，使用_访问属性则是直接访问底层的存储属性，不会调用setter方法；<br>2、assign、strong、weak、copy、readonly、readwrite、atomic；<br>    atomic和nonatomic —— 线程安全方面: atomic是一种多线程保护机制，使得属性具有原子性，防止在未完成赋值的情况下另一个线程读取属性造成的数据错误问题；atomic实际是采用自旋锁的方式，给setter方法加锁，这种方式需要耗费资源，执行效率会变低；<br>    自旋锁与互斥锁的区别：自旋锁指的是在一个线程执行的时候加锁，下一个线程会一直等待；当上一个线程执行完后，下一个线程立即执行；而互斥锁在等待的时候，下一个线程会进入睡眠状态；当上一个线程执行完后，下一个线程才会被唤醒，然后再执行；<br>    readwrite和readonly —— 访问权限: readonly只读属性，只会生成getter方法，不会生成setter方法；<br>    assign、weak、strong、copy、retain —— 内存管理:<br>    assign: 修饰基本数据类型，Int Float 还有id类型<br>    weak: 弱引用，只是单纯引用某个对象，不持有该对象<br>    strong（retain 用于MRC）: 强引用，使对象的引用数据类型+1<br>    assign和weak比较：<br>    相同点：assgin和weak不会牵扯到内存管理，不会增加引用计数<br>    不同点：assign可修饰基本数据类型，也可修饰OC对象，但如果修饰对象类型指向的是一个强指针，当它指向的这个指针释放后，他仍指向这块内存，必须手动给置为nil，否则就会产生野指针，如果还通过此指针操作那块内存，便会导致EXC_BAD_ACCESS错误，调用了已经释放的内存空间；而weak只能修饰OC对象，且相比assign比较安全，如果指向的对象消失了，那么他会自动置为nil，不会产生野指针。<br>    strong和copy比较：<br>    浅拷贝：指针拷贝，不产生新的对象，源对象的引用计数器加1；只是多了一个指向这块内存的指针，共用一块内存。<br>    深拷贝：对象拷贝，会产生新的对象，源对象的引用计数器不变；两块内存是完全不同的，也就是两个对象指针分别指向不同的内存，互不干涉。<br>    判断是浅拷贝和深拷贝就看一下两个变量的内存地址是否一样，一样就是浅拷贝，不一样就是深拷贝，也可以改变一个变量的其中一个属性值看两者的值都会发生变化；<br>    在不可变对象之间进行转换，strong与copy作用是一样的，但是如果在不可变与可变之间进行操作，就需要使用copy,这也就是为什么很多地方用copy，而不是strong修饰 NSString,NSArray等存在可变不可变之分的类对象了，避免出现意外的数据操作.<br>3、引申：block用过吗？修饰block用什么？为什么？<br>    要使用copy修饰；<br>    （1）block内部没有调用外部局部变量时存放在全局区(ARC和MRC下均是)<br>    （2）block使用了外部局部变量,这种情况也正是我们平时所常用的方式。MRC：Block的内存地址显示在栈区,栈区的特点就是创建的对象随时可能被销毁,一旦被销毁后续再次调用空对象就可能会造成程序崩溃,在对block进行copy后,block存放在堆区.所以在使用Block属性时使用copy修饰。但是ARC中的Block都会在堆上的，系统会默认对Block进行copy操作<br>    (3）用copy，strong修饰block在ARC和MRC都是可以的，都是在堆区<br>    总结：<br>    1:一共有三种类型的Block.分为<strong>NSGlobalBlock,</strong>NSStackBlock,<strong>NSMallocBlock.<br>    2:没有访问 auto变量 的block 就是 __NSGlobalBlock；访问了auto变量 的block 就是 __NSStackBlock；当一个</strong>NSStackBlock调用了copy操作,返回的就是一个__NSMallocBlock；<br>    3:在ARC环境下,编译器会自动把栈上的block copy到堆上。<br>    <a href="https://www.cnblogs.com/guohai-stronger/p/8993093.html" target="_blank" rel="noopener">参考链接：property属性</a><br>4、引申：iOS中代码创建UIView的时候，使用weak还是strong？<br>    <a href="https://blog.csdn.net/cjlcooper/article/details/53526505" target="_blank" rel="noopener">链接</a></p>
 <h4 id="Git和SVN的区别"><a href="#Git和SVN的区别" class="headerlink" title="Git和SVN的区别"></a>Git和SVN的区别</h4><p>Git是分布式的，SVN是集中式的；Git和SVN都有集中式版本库和Server端，但Git是分布式管理的，每一个开发者都有一个Local Repository,所以没有网络也可以commit，创建分支，查看历史记录等，等联网以后push到远端即可；</p>
 <h4 id="iOS中协议和代理的理解"><a href="#iOS中协议和代理的理解" class="headerlink" title="iOS中协议和代理的理解"></a>iOS中协议和代理的理解</h4><p>协议：可以把协议理解成方法的集合，与Java的接口不同的是，协议可以定义必须实现和非必须实现的方法；<br>代理：一种设计模式，通过协议（Protocal）来实现；让其他类去实现所遵循的协议中的方法；理解成： 一个View有一个事件处理，在view中声明一个协议，在控制器中将view的代理设置为self，这时候self就是该view的代理；</p>
@@ -446,7 +449,7 @@ Dispatch Semaphore 在实际开发中主要用于：
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
