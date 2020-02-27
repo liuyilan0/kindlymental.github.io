@@ -229,6 +229,139 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/27/iOS%E7%9A%84%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C%E5%90%8C%E6%AD%A5%E6%89%A7%E8%A1%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="aliya">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="兜里没糖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/27/iOS%E7%9A%84%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C%E5%90%8C%E6%AD%A5%E6%89%A7%E8%A1%8C/" itemprop="url">iOS中的多线程和异步操作实现同步执行</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-27T10:54:28+08:00">
+                2020-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="iOS多线程"><a href="#iOS多线程" class="headerlink" title="iOS多线程"></a>iOS多线程</h2><blockquote>
+<p>线程：任务执行的最小单位；<br>主线程：用于执行用户UI的重要操作，耗时操作不要放在主线程，否则会卡死；<br>多线程：为了解决耗时操作执行的问题，引入了多线程；线程分为同步执行和异步执行；<br>同步和异步：同步指的是任务会立即在该线程执行，不会开辟新线程；异步指的是不一定会立即执行，可能会开辟新线程；<br>队列：队列是用来管理线程执行的；队列分为串行队列和并行队列；串行队列指的是按顺序执行；并行队列是可以同时执行；<br>主队列: iOS中主队列只会在主线程上执行，不能在同步执行主队列，会造成死锁；<a href="https://juejin.im/post/5a323c046fb9a044ff317c4d" target="_blank" rel="noopener">参考资料</a></p>
+</blockquote>
+<blockquote>
+<p>GCD中的队列：<br>1、主队列 dispatch_main_queue(); 串行,用于更新UI；<br>2、全局队列 dispatch_global_queue(); 并行,四个优先级: background,low,default,high；<br>3、自定义队列 dispatch_queue_t queue; 可以自定义是并行: DISPATCH_QUEUE_CONCURRENT 或者串行 DISPATCH_QUEUE_SERIAL</p>
+</blockquote>
+<p>引用掘金的一副图片：<a href="https://juejin.im/post/5a90de68f265da4e9b592b40" target="_blank" rel="noopener">资料路径</a><br><img src="http://img.liugezhou.online/WechatIMG348.png" alt="线程和队列组合形式"></p>
+<h2 id="iOS异步操作同步执行"><a href="#iOS异步操作同步执行" class="headerlink" title="iOS异步操作同步执行"></a>iOS异步操作同步执行</h2><p>在进行网络请求中，我们会经常因为业务需要对接口请求做不同的处理；以下主要介绍两类：多个网络请求在全部都得到响应后做业务处理、多个网络请求（数据相互依赖）要求实现同步执行；</p>
+<blockquote>
+<p>信号量(Semaphore)<br>队列组</p>
+</blockquote>
+<h3 id="多个网络请求在全部都得到响应后做业务处理"><a href="#多个网络请求在全部都得到响应后做业务处理" class="headerlink" title="多个网络请求在全部都得到响应后做业务处理"></a>多个网络请求在全部都得到响应后做业务处理</h3><p>1、信号量和队列组结合<br><img src="http://img.liugezhou.online/WechatIMG347.png" alt="信号量和队列组"><br>2、队列组(dispatch_group_t)<br><img src="http://img.liugezhou.online/WechatIMG346.png" alt="队列组"> </p>
+<p>结果：网络请求返回顺序是无序的，等所有网络请求都拿到结果后会走group的notify方法；</p>
+<h3 id="多个网络请求（数据相互依赖）要求实现同步执行-同步队列异步执行"><a href="#多个网络请求（数据相互依赖）要求实现同步执行-同步队列异步执行" class="headerlink" title="多个网络请求（数据相互依赖）要求实现同步执行 - (同步队列异步执行)"></a>多个网络请求（数据相互依赖）要求实现同步执行 - (同步队列异步执行)</h3><p><img src="http://img.liugezhou.online/WechatIMG349.png" alt="信号量控制异步操作同步执行"><br>同上操作：<img src="http://img.liugezhou.online/WechatIMG350.png" alt="信号量控制异步操作同步执行"><br>结果：网络请求都是顺序执行</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/07/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E8%B8%A9%E5%9D%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1044,7 +1177,7 @@ Dispatch Semaphore 在实际开发中主要用于：
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
