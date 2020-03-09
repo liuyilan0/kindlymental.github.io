@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="CSS预处理程序介绍 CSS预处理程序是基于 CSS 扩展了一套属于自己的 DSL，来解决书写 CSS 时繁杂的问题。        1、语法不够强大，比如无法嵌套书写导致模块化开发中需要书写很多重复的选择器；        2、没有变量和合理的样式复用机制，使得逻辑上相关的属性值必须以字面量的形式重复输出，导致难以维护。  功能 支持嵌套语法 变量 变量为 CSS 增加了一种有效的复用方式，减少">
+<meta name="description" content="CSS预处理程序介绍 CSS预处理程序是基于 CSS 扩展了一套属于自己的 DSL，来解决书写 CSS 时繁杂的问题。        1、语法不够强大，比如无法嵌套书写导致模块化开发中需要书写很多重复的选择器；        2、没有变量和合理的样式复用机制，使得逻辑上相关的属性值必须以字面量的形式重复输出，导致难以维护。  功能 支持嵌套语法 支持使用运算符 例如less中： 1234 @fon">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sass、less、stylus总结">
 <meta property="og:url" content="http://yoursite.com/2020/03/09/sass/less/stylus%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="兜里没糖">
-<meta property="og:description" content="CSS预处理程序介绍 CSS预处理程序是基于 CSS 扩展了一套属于自己的 DSL，来解决书写 CSS 时繁杂的问题。        1、语法不够强大，比如无法嵌套书写导致模块化开发中需要书写很多重复的选择器；        2、没有变量和合理的样式复用机制，使得逻辑上相关的属性值必须以字面量的形式重复输出，导致难以维护。  功能 支持嵌套语法 变量 变量为 CSS 增加了一种有效的复用方式，减少">
+<meta property="og:description" content="CSS预处理程序介绍 CSS预处理程序是基于 CSS 扩展了一套属于自己的 DSL，来解决书写 CSS 时繁杂的问题。        1、语法不够强大，比如无法嵌套书写导致模块化开发中需要书写很多重复的选择器；        2、没有变量和合理的样式复用机制，使得逻辑上相关的属性值必须以字面量的形式重复输出，导致难以维护。  功能 支持嵌套语法 支持使用运算符 例如less中： 1234 @fon">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-03-09T12:57:58.000Z">
-<meta property="article:modified_time" content="2020-03-09T13:51:36.630Z">
+<meta property="article:modified_time" content="2020-03-09T14:02:49.920Z">
 <meta property="article:author" content="aliya">
 <meta name="twitter:card" content="summary">
 
@@ -302,7 +302,7 @@
         <h3 id="CSS预处理程序"><a href="#CSS预处理程序" class="headerlink" title="CSS预处理程序"></a>CSS预处理程序</h3><h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><blockquote>
 <p>CSS预处理程序是基于 CSS 扩展了一套属于自己的 DSL，来解决书写 CSS 时繁杂的问题。<br>        1、语法不够强大，比如无法嵌套书写导致模块化开发中需要书写很多重复的选择器；<br>        2、没有变量和合理的样式复用机制，使得逻辑上相关的属性值必须以字面量的形式重复输出，导致难以维护。</p>
 </blockquote>
-<h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><p> <strong><em>支持嵌套语法</em></strong><br> <strong><em>变量</em></strong><br> 变量为 CSS 增加了一种有效的复用方式，减少了原来在 CSS 中无法避免的重复「硬编码」。<br> <strong><em>混入</em></strong><br> 混入（mixin）提供了样式层面的抽象。从语法上来说，三种预处理器的差异也比较大，这甚至会直接影响到我们的开发方式。</p>
+<h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><p> <strong><em>支持嵌套语法</em></strong><br> <strong><em>支持使用运算符</em></strong><br> 例如less中：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> @fontSize: 10px;</span><br><span class="line">.myclass &#123;</span><br><span class="line"> font-size: @fontSize * 2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br> <strong><em>变量</em></strong><br> 变量为 CSS 增加了一种有效的复用方式，减少了原来在 CSS 中无法避免的重复「硬编码」。<br> <strong><em>可动态构建选择器</em></strong><br> <strong><em>混入</em></strong><br> 混入（mixin）提供了样式层面的抽象。</p>
 <hr>
 <h3 id="三大CSS预处理器框架"><a href="#三大CSS预处理器框架" class="headerlink" title="三大CSS预处理器框架"></a>三大CSS预处理器框架</h3><h4 id="SASS"><a href="#SASS" class="headerlink" title="SASS"></a>SASS</h4><blockquote>
 <p>2007年诞生，是最早的CSS预处理器，拥有ruby社区的支持和compass这一最强大的css框架，目前受LESS影响，已经进化到了全面兼容CSS的SCSS。</p>
