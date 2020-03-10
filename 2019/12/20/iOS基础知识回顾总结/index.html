@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>iOS基础知识回顾总结 | 兜里没糖</title>
+  <meta name="description" content="感想道阻且长，行则将至 心存敬畏之心，方能行有所止面试题 property的修饰符有哪些？并说明其区别？ atomic和nontomic的区别是什么？ iOS实现多线程的方式有哪些？举例说明。 dispatch的线程组使用过吗？怎么使用，有a、b、c、d 4个异步请求，如何判断a、b、c、d都完成执行？如果需要a、b、c、d顺序执行，该如何实现？ 在使用自动布局的时候有没有遇到过什么问题？ iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS基础知识回顾总结">
+<meta property="og:url" content="http://yoursite.com/2019/12/20/iOS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9E%E9%A1%BE%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="兜里没糖">
+<meta property="og:description" content="感想道阻且长，行则将至 心存敬畏之心，方能行有所止面试题 property的修饰符有哪些？并说明其区别？ atomic和nontomic的区别是什么？ iOS实现多线程的方式有哪些？举例说明。 dispatch的线程组使用过吗？怎么使用，有a、b、c、d 4个异步请求，如何判断a、b、c、d都完成执行？如果需要a、b、c、d顺序执行，该如何实现？ 在使用自动布局的时候有没有遇到过什么问题？ iOS">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-12-20T15:46:08.000Z">
+<meta property="article:modified_time" content="2020-03-10T05:14:23.670Z">
+<meta property="article:author" content="aliya">
+<meta property="article:tag" content="基础知识">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/2019/12/20/iOS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9E%E9%A1%BE%E6%80%BB%E7%BB%93/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="兜里没糖" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 4.1.1"></head>
+
+
+<body class="main-center theme-green" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/kindlymental" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">兜里没糖</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> BeiJing</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="https://github.com/kindlymental" target="_blank" rel="noopener">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/kindlymental" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS%E9%A2%84%E5%A4%84%E7%90%86%E7%A8%8B%E5%BA%8F/" rel="tag">CSS预处理程序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS13%E9%80%82%E9%85%8D/" rel="tag">iOS13适配</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS%E5%B8%83%E5%B1%80%E6%96%B9%E5%BC%8F/" rel="tag">iOS布局方式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="tag">基础知识</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%88%E6%9D%83%E8%AE%A4%E8%AF%81/" rel="tag">授权认证</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE/" rel="tag">项目配置</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/CSS%E9%A2%84%E5%A4%84%E7%90%86%E7%A8%8B%E5%BA%8F/" style="font-size: 13px;">CSS预处理程序</a> <a href="/tags/iOS13%E9%80%82%E9%85%8D/" style="font-size: 13px;">iOS13适配</a> <a href="/tags/iOS%E5%B8%83%E5%B1%80%E6%96%B9%E5%BC%8F/" style="font-size: 13px;">iOS布局方式</a> <a href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 13px;">基础知识</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 13px;">多线程</a> <a href="/tags/%E6%8E%88%E6%9D%83%E8%AE%A4%E8%AF%81/" style="font-size: 13px;">授权认证</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE/" style="font-size: 13px;">项目配置</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/03/09/sass%5Cless%5Cstylus%E6%80%BB%E7%BB%93/" class="title">sass、less、stylus总结</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-03-09T12:57:58.000Z" itemprop="datePublished">2020-03-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/iOS/">iOS</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/02/27/iOS%E7%9A%84%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C%E5%90%8C%E6%AD%A5%E6%89%A7%E8%A1%8C/" class="title">iOS中的多线程和异步操作实现同步执行</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-02-27T02:54:28.000Z" itemprop="datePublished">2020-02-27</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/01/07/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E8%B8%A9%E5%9D%91/" class="title">微信小程序开发踩坑</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-01-07T05:49:44.000Z" itemprop="datePublished">2020-01-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/iOS/">iOS</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/12/30/Texture/" class="title">Texture</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-12-30T06:38:20.000Z" itemprop="datePublished">2019-12-30</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/iOS/">iOS</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/12/30/iOS%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/" class="title">iOS项目开发总结</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-12-30T04:29:58.000Z" itemprop="datePublished">2019-12-30</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-iOS基础知识回顾总结" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iOS基础知识回顾总结
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/12/20/iOS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9E%E9%A1%BE%E6%80%BB%E7%BB%93/" class="article-date">
+	  <time datetime="2019-12-20T15:46:08.000Z" itemprop="datePublished">2019-12-20</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="tag">基础知识</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/12/20/iOS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9E%E9%A1%BE%E6%80%BB%E7%BB%93/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h3><pre><code>道阻且长，行则将至
+心存敬畏之心，方能行有所止</code></pre><h3 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h3><blockquote>
+<p>property的修饰符有哪些？并说明其区别？<br> atomic和nontomic的区别是什么？<br> iOS实现多线程的方式有哪些？举例说明。<br> dispatch的线程组使用过吗？怎么使用，有a、b、c、d 4个异步请求，如何判断a、b、c、d都完成执行？如果需要a、b、c、d顺序执行，该如何实现？<br> 在使用自动布局的时候有没有遇到过什么问题？<br> iOS13的新特性？<br> Git和SVN的区别？<br> iOS中协议除了在代理中使用还有什么作用？<br> 说说你对代理的理解，如果一个view（a）要传值给另一个view（b），那么谁是谁的代理？<br> KVC是什么？KVC机制的原理是什么？如果自己给一个属性重写了getter和setter方法，那么在.m中直接该属性的成员变量会出现什么效果？</p>
+</blockquote>
+<blockquote>
+<p> 关于 HTTP 请求 GET 和 POST 的区别是什么?<br>    如何把 NSArray 里的 NSNumber 对象以顺序或反序排序?<br>    iOS 开发中数据持久化的几种方式。<br>    描述 UITableView的单元格重用机制,以及如何使用。<br>    循环引用的产生原因,以及解决方法。<br>    NSTimer 使用时注意事项?<br>    在某个实例方法中，self.name = _name，name = _name 它们有区别吗，为什么？</p>
+</blockquote>
+<blockquote>
+<p>  了解GCD的信号量机制吗？</p>
+</blockquote>
+<h4 id="Property属性"><a href="#Property属性" class="headerlink" title="Property属性"></a>Property属性</h4><p>1、首先解释property，property是iOS用于定义属性，不需要手动编写访问方法，如果需要的话可以重写getter和setter方法；OC提供点语法来访问getter和setter，使用_访问属性则是直接访问底层的存储属性，不会调用setter方法；<br>2、assign、strong、weak、copy、readonly、readwrite、atomic；<br>    atomic和nonatomic —— 线程安全方面: atomic是一种多线程保护机制，使得属性具有原子性，防止在未完成赋值的情况下另一个线程读取属性造成的数据错误问题；atomic实际是采用自旋锁的方式，给setter方法加锁，这种方式需要耗费资源，执行效率会变低；<br>    自旋锁与互斥锁的区别：自旋锁指的是在一个线程执行的时候加锁，下一个线程会一直等待；当上一个线程执行完后，下一个线程立即执行；而互斥锁在等待的时候，下一个线程会进入睡眠状态；当上一个线程执行完后，下一个线程才会被唤醒，然后再执行；<br>    readwrite和readonly —— 访问权限: readonly只读属性，只会生成getter方法，不会生成setter方法；<br>    assign、weak、strong、copy、retain —— 内存管理:<br>    assign: 修饰基本数据类型，Int Float 还有id类型<br>    weak: 弱引用，只是单纯引用某个对象，不持有该对象<br>    strong（retain 用于MRC）: 强引用，使对象的引用数据类型+1<br>    assign和weak比较：<br>    相同点：assgin和weak不会牵扯到内存管理，不会增加引用计数<br>    不同点：assign可修饰基本数据类型，也可修饰OC对象，但如果修饰对象类型指向的是一个强指针，当它指向的这个指针释放后，他仍指向这块内存，必须手动给置为nil，否则就会产生野指针，如果还通过此指针操作那块内存，便会导致EXC_BAD_ACCESS错误，调用了已经释放的内存空间；而weak只能修饰OC对象，且相比assign比较安全，如果指向的对象消失了，那么他会自动置为nil，不会产生野指针。<br>    strong和copy比较：<br>    浅拷贝：指针拷贝，不产生新的对象，源对象的引用计数器加1；只是多了一个指向这块内存的指针，共用一块内存。<br>    深拷贝：对象拷贝，会产生新的对象，源对象的引用计数器不变；两块内存是完全不同的，也就是两个对象指针分别指向不同的内存，互不干涉。<br>    判断是浅拷贝和深拷贝就看一下两个变量的内存地址是否一样，一样就是浅拷贝，不一样就是深拷贝，也可以改变一个变量的其中一个属性值看两者的值都会发生变化；<br>    在不可变对象之间进行转换，strong与copy作用是一样的，但是如果在不可变与可变之间进行操作，就需要使用copy,这也就是为什么很多地方用copy，而不是strong修饰 NSString,NSArray等存在可变不可变之分的类对象了，避免出现意外的数据操作.<br>3、引申：block用过吗？修饰block用什么？为什么？<br>    要使用copy修饰；<br>    （1）block内部没有调用外部局部变量时存放在全局区(ARC和MRC下均是)<br>    （2）block使用了外部局部变量,这种情况也正是我们平时所常用的方式。MRC：Block的内存地址显示在栈区,栈区的特点就是创建的对象随时可能被销毁,一旦被销毁后续再次调用空对象就可能会造成程序崩溃,在对block进行copy后,block存放在堆区.所以在使用Block属性时使用copy修饰。但是ARC中的Block都会在堆上的，系统会默认对Block进行copy操作<br>    (3）用copy，strong修饰block在ARC和MRC都是可以的，都是在堆区<br>    总结：<br>    1:一共有三种类型的Block.分为<strong>NSGlobalBlock,</strong>NSStackBlock,<strong>NSMallocBlock.<br>    2:没有访问 auto变量 的block 就是 __NSGlobalBlock；访问了auto变量 的block 就是 __NSStackBlock；当一个</strong>NSStackBlock调用了copy操作,返回的就是一个__NSMallocBlock；<br>    3:在ARC环境下,编译器会自动把栈上的block copy到堆上。<br>    <a href="https://www.cnblogs.com/guohai-stronger/p/8993093.html" target="_blank" rel="noopener">参考链接：property属性</a><br>4、引申：iOS中代码创建UIView的时候，使用weak还是strong？<br>    <a href="https://blog.csdn.net/cjlcooper/article/details/53526505" target="_blank" rel="noopener">链接</a></p>
+<h4 id="Git和SVN的区别"><a href="#Git和SVN的区别" class="headerlink" title="Git和SVN的区别"></a>Git和SVN的区别</h4><p>Git是分布式的，SVN是集中式的；Git和SVN都有集中式版本库和Server端，但Git是分布式管理的，每一个开发者都有一个Local Repository,所以没有网络也可以commit，创建分支，查看历史记录等，等联网以后push到远端即可；</p>
+<h4 id="iOS中协议和代理的理解"><a href="#iOS中协议和代理的理解" class="headerlink" title="iOS中协议和代理的理解"></a>iOS中协议和代理的理解</h4><p>协议：可以把协议理解成方法的集合，与Java的接口不同的是，协议可以定义必须实现和非必须实现的方法；<br>代理：一种设计模式，通过协议（Protocal）来实现；让其他类去实现所遵循的协议中的方法；理解成： 一个View有一个事件处理，在view中声明一个协议，在控制器中将view的代理设置为self，这时候self就是该view的代理；</p>
+<h4 id="深浅拷贝"><a href="#深浅拷贝" class="headerlink" title="深浅拷贝"></a>深浅拷贝</h4><p>父类实现深拷贝时，子类如何实现深度拷贝。父类没有实现深拷贝时，子类如何实现深度拷贝。 深拷贝同浅拷贝的区别：浅拷贝是指针拷贝，对一个对象进行浅拷贝，相当于对指向对象的指针进行复制，产生一个新的指向这个对象的指针，那么就是有两个指针指向同一个对象，这个对象销毁后两个指针都应该置空。深拷贝是对一个对象进行拷贝，相当于对对象进行复制，产生一个新的对象，那么就有两个指针分别指向两个对象。当一个对象改变或者被销毁后拷贝出来的新的对象不受影响。</p>
+<p>实现深拷贝需要实现NSCoying协议，实现- (id)copyWithZone:(NSZone *)zone 方法。当对一个property属性含有copy修饰符的时候，在进行赋值操作的时候实际上就是调用这个方法。</p>
+<p>父类实现深拷贝之后，子类只要重写copyWithZone方法，在方法内部调用父类的copyWithZone方法，之后实现自己的属性的处理</p>
+<p>父类没有实现深拷贝，子类除了需要对自己的属性进行处理，还要对父类的属性进行处理。</p>
+<h4 id="KVC和KVO"><a href="#KVC和KVO" class="headerlink" title="KVC和KVO"></a>KVC和KVO</h4><p> KVO，NSNotification，delegate及block区别 KVO就是cocoa框架实现的观察者模式，一般同KVC搭配使用，通过KVO可以监测一个值的变化，比如View的高度变化。是一对多的关系，一个值的变化会通知所有的观察者。 NSNotification是通知，也是一对多的使用场景。在某些情况下，KVO和NSNotification是一样的，都是状态变化之后告知对方。NSNotification的特点，就是需要被观察者先主动发出通知，然后观察者注册监听后再来进行响应，比KVO多了发送通知的一步，但是其优点是监听不局限于属性的变化，还可以对多种多样的状态变化进行监听，监听范围广，使用也更灵活。</p>
+<p>delegate 是代理，就是我不想做的事情交给别人做。比如狗需要吃饭，就通过delegate通知主人，主人就会给他做饭、盛饭、倒水，这些操作，这些狗都不需要关心，只需要调用delegate（代理人）就可以了，由其他类完成所需要的操作。所以delegate是一对一关系。</p>
+<p>block是delegate的另一种形式，是函数式编程的一种形式。使用场景跟delegate一样，相比delegate更灵活，而且代理的实现更直观。</p>
+<p>KVO一般的使用场景是数据，需求是数据变化，比如股票价格变化，我们一般使用KVO（观察者模式）。delegate一般的使用场景是行为，需求是需要别人帮我做一件事情，比如买卖股票，我们一般使用delegate。 Notification一般是进行全局通知，比如利好消息一出，通知大家去买入。delegate是强关联，就是委托和代理双方互相知道，你委托别人买股票你就需要知道经纪人，经纪人也不要知道自己的顾客。Notification是弱关联，利好消息发出，你不需要知道是谁发的也可以做出相应的反应，同理发消息的人也不需要知道接收的人也可以正常发出消息。</p>
+<h4 id="GCD多线程"><a href="#GCD多线程" class="headerlink" title="GCD多线程"></a>GCD多线程</h4><p>多线程的概念：同步、异步、串行、并行、死锁、队列</p>
+<p>1、队列：三种类型：主队列（dispatch_get_main_queue）、全局并发队列（dispath_get_global_queue）、自定义队列（dispatch_queue_create）<br>2、死锁：死锁就是队列引起的循环等待；常见的死锁：主队列同步；</p>
+<blockquote>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dispatch_sync(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">    NSLog(@&quot;deallock&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+解决：在主线程中运用主队列同步，也就是把任务放到了主线程的队列中。同步对于任务是立刻执行的，那么当把任务放进主队列时，它就会立马执行,只有执行完这个任务，viewDidLoad才会继续向下执行。而viewDidLoad和任务都是在主队列上的，由于队列的先进先出原则，任务又需等待viewDidLoad执行完毕后才能继续执行，viewDidLoad和这个任务就形成了相互循环等待，就造成了死锁。想避免这种死锁，可以将同步改成异步dispatch_async,或者将dispatch_get_main_queue换成其他串行或并行队列，都可以解决。
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">dispatch_queue_t serialQueue &#x3D; dispatch_queue_create(&quot;test&quot;, DISPATCH_QUEUE_SERIAL);</span><br><span class="line">dispatch_async(serialQueue, ^&#123;</span><br><span class="line">    dispatch_sync(serialQueue, ^&#123;</span><br><span class="line">        </span><br><span class="line">        NSLog(@&quot;deadlock&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+上面这种情况也会造成死锁；</code></pre><p>3、GCD执行顺序：<br>    1、串行队列先异步后同步<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">dispatch_queue_t serialQueue &#x3D; dispatch_queue_create(&quot;test&quot;, DISPATCH_QUEUE_SERIAL);</span><br><span class="line">NSLog(@&quot;1&quot;);</span><br><span class="line">dispatch_async(serialQueue, ^&#123;</span><br><span class="line">     NSLog(@&quot;2&quot;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">NSLog(@&quot;3&quot;);</span><br><span class="line">dispatch_sync(serialQueue, ^&#123;</span><br><span class="line">    NSLog(@&quot;4&quot;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">NSLog(@&quot;5&quot;);</span><br></pre></td></tr></table></figure><br>    打印结果： 1 3 2 4 5<br>    分析：首先先打印1。接下来将任务2其添加至串行队列上，由于任务2是异步，不会阻塞线程，继续向下执行，打印3然后是任务4,将任务4添加至串行队列上，因为任务4和任务2在同一串行队列，根据队列先进先出原则，任务4必须等任务2执行后才能执行，又因为任务4是同步任务，会阻塞线程，只有执行完任务4才能继续向下执行打印5。<br>    2、performSelector<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dispatch_async(dispatch_get_global_queue(0, 0), ^&#123;</span><br><span class="line">    [self performSelector:@selector(test:) withObject:nil afterDelay:0];</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><br>    分析：test方法并不会执行；[performSelector withObject]这个方法本身需要手动添加在runloop中去执行的；而GCD的全局队列所在线程并没有开启runloop，所以不会执行；如果把队列改为dispatch_get_main_queue主队列，由于主队列所在的主线程默认是开启runloop的，所以会之执行test方法；<br>4、dispatch_barrier_async（栅栏函数）<br>    问：怎么用GCD实现多读单写？<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">dispatch_queue_t concurrentQueue &#x3D; dispatch_queue_create(&quot;test&quot;, DISPATCH_QUEUE_CONCURRENT);</span><br><span class="line"></span><br><span class="line">for (NSInteger i &#x3D; 0; i &lt; 10; i++) &#123;</span><br><span class="line">    dispatch_sync(concurrentQueue, ^&#123;</span><br><span class="line">        NSLog(@&quot;%zd&quot;,i);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dispatch_barrier_sync(concurrentQueue, ^&#123;</span><br><span class="line">    NSLog(@&quot;barrier&quot;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">for (NSInteger i &#x3D; 10; i &lt; 20; i++) &#123;</span><br><span class="line">    dispatch_sync(concurrentQueue, ^&#123;</span><br><span class="line">        NSLog(@&quot;%zd&quot;,i);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>    分析：这里的dispatch_barrier_sync上的队列要和需要阻塞的任务在同一队列上，否则是无效的。从打印上看，任务0-9和任务任务10-19因为是异步并发的原因，彼此是无序的。而由于栅栏函数的存在，导致顺序必然是先执行任务0-9，再执行栅栏函数，再去执行任务10-19。<br>    而dispatch_barrier_sync和dispatch_barrier_async的区别也就在于会不会阻塞当前线程。比如，上述代码如果在dispatch_barrier_async后随便加一条打印，则会先去执行该打印，再去执行任务0-9和栅栏函数；而如果是dispatch_barrier_sync，则会在任务0-9和栅栏函数后去执行这条打印。<br>    设计多读单写：<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">- (id)readDataForKey:(NSString *)key</span><br><span class="line">&#123;</span><br><span class="line">    __block id result;</span><br><span class="line">    dispatch_sync(_concurrentQueue, ^&#123;</span><br><span class="line">        result &#x3D; [self valueForKey:key];</span><br><span class="line">    &#125;);</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)writeData:(id)data forKey:(NSString *)key</span><br><span class="line">&#123;</span><br><span class="line">    dispatch_barrier_async(_concurrentQueue, ^&#123;</span><br><span class="line">        [self setValue:data forKey:key];</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>5、dispatch_group_async<br>    场景：在n个耗时并发任务都完成后，再去执行接下来的任务。比如，在n个网络请求完成后去刷新UI页面；<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">dispatch_queue_t concurrentQueue &#x3D; dispatch_queue_create(&quot;test1&quot;, DISPATCH_QUEUE_CONCURRENT);</span><br><span class="line">dispatch_group_t group &#x3D; dispatch_group_create();</span><br><span class="line"></span><br><span class="line">for (NSInteger i &#x3D; 0; i &lt; 10; i++) &#123;</span><br><span class="line">    dispatch_group_async(group, concurrentQueue, ^&#123;</span><br><span class="line">        sleep(1);</span><br><span class="line">        NSLog(@&quot;%zd:网络请求&quot;,i);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dispatch_group_notify(group, dispatch_get_main_queue(), ^&#123;</span><br><span class="line">    NSLog(@&quot;刷新页面&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><br>6、Dispatch Semaphore<br>    GCD 中的信号量是指 Dispatch Semaphore，是持有计数的信号。</p>
+</blockquote>
+<pre><code>Dispatch Semaphore 提供了三个函数：
+1.dispatch_semaphore_create：创建一个Semaphore并初始化信号的总量
+2.dispatch_semaphore_signal：发送一个信号，让信号总量加1
+3.dispatch_semaphore_wait：可以使总信号量减1，当信号总量为0时就会一直等待（阻塞所在线程），否则就可以正常执行。
+
+Dispatch Semaphore 在实际开发中主要用于：
+1、保持线程同步，将异步执行任务转换为同步执行任务
+2、保证线程安全，为线程加锁
+
+例如：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (void)asyncTask</span><br><span class="line">&#123;</span><br><span class="line">    dispatch_semaphore_wait(_semaphore, DISPATCH_TIME_FOREVER);   </span><br><span class="line">    count++;</span><br><span class="line">    sleep(1);</span><br><span class="line">    NSLog(@&quot;执行任务:%zd&quot;,count);</span><br><span class="line">    dispatch_semaphore_signal(_semaphore);</span><br><span class="line">&#125;</span><br><span class="line">for (NSInteger i &#x3D; 0; i &lt; 100; i++) &#123;</span><br><span class="line">    dispatch_async(dispatch_get_global_queue(0, 0), ^&#123;</span><br><span class="line">        [self asyncTask];</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+分析：然后发现打印是从任务1顺序执行到100，没有发生两个任务同时执行的情况；
+原因如下:在子线程中并发执行asyncTask，那么第一个添加到并发队列里的，会将信号量减1，此时信号量等于0，可以执行接下来的任务。而并发队列中其他任务，由于此时信号量不等于0，必须等当前正在执行的任务执行完毕后调用dispatch_semaphore_signal将信号量加1，才可以继续执行接下来的任务，以此类推，从而达到线程加锁的目的。</code></pre>
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/2019/12/20/iOS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9E%E9%A1%BE%E6%80%BB%E7%BB%93/" title="iOS基础知识回顾总结" target="_blank" rel="external">http://yoursite.com/2019/12/20/iOS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9E%E9%A1%BE%E6%80%BB%E7%BB%93/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/kindlymental" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/kindlymental" target="_blank"><span class="text-dark">兜里没糖</span><small class="ml-1x">Developer</small></a></h3>
+        <div>兜里没糖</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2019/12/23/iOS13%E9%80%82%E9%85%8D/" title="iOS13适配"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/kindlymental" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2020 aliya
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
