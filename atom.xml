@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-03-10T05:14:39.080Z</updated>
+  <updated>2020-03-17T16:37:12.390Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,58 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>微信小程序开发踩坑</title>
+    <link href="http://yoursite.com/2020/03/18/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E8%B8%A9%E5%9D%91%20copy/"/>
+    <id>http://yoursite.com/2020/03/18/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E8%B8%A9%E5%9D%91%20copy/</id>
+    <published>2020-03-17T16:37:12.000Z</published>
+    <updated>2020-03-17T16:37:12.390Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Button设置宽高无效"><a href="#Button设置宽高无效" class="headerlink" title="Button设置宽高无效"></a>Button设置宽高无效</h3><p>app.json中默认有一个”style”: “v2”,去掉就好了</p><h3 id="使用-Authorization-进行授权"><a href="#使用-Authorization-进行授权" class="headerlink" title="使用 Authorization 进行授权"></a>使用 Authorization 进行授权</h3><p>在做微信小程序时，需要使用 Authorization 进行授权，结果每次登录的时候都出现授权弹窗。<br>解决：使用Authorization 授权时，会将用户名和密码用 base64 进行编码然后放到 header 中传入后端代码，</p><blockquote><p>header: {<br>        ‘Content-Type’: ‘application/json’,<br>        ‘Authorization’: ‘Basic ‘ + base64Code,<br>      },<br>验证方式：在服务端也会有固定的用户名密码，与之比较，相同则身份通过，否则不通过才会出现授权弹窗。<br><a href="https://www.jianshu.com/p/499595423f95" target="_blank" rel="noopener">参考资料1</a><br><a href="https://www.cnblogs.com/Man-Dream-Necessary/p/8400376.html" target="_blank" rel="noopener">参考资料2</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Button设置宽高无效&quot;&gt;&lt;a href=&quot;#Button设置宽高无效&quot; class=&quot;headerlink&quot; title=&quot;Button设置宽高无效&quot;&gt;&lt;/a&gt;Button设置宽高无效&lt;/h3&gt;&lt;p&gt;app.json中默认有一个”style”: “v2”,去掉
+      
+    
+    </summary>
+    
+    
+      <category term="微信小程序" scheme="http://yoursite.com/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    
+    
+      <category term="授权认证" scheme="http://yoursite.com/tags/%E6%8E%88%E6%9D%83%E8%AE%A4%E8%AF%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript基础入门</title>
+    <link href="http://yoursite.com/2020/03/17/JavaScript%E5%85%A5%E9%97%A8/"/>
+    <id>http://yoursite.com/2020/03/17/JavaScript%E5%85%A5%E9%97%A8/</id>
+    <published>2020-03-17T15:52:25.000Z</published>
+    <updated>2020-03-17T16:42:27.860Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p> 声明变量时候用var命令，变量是有作用域的，分为局部变量和全局变量；<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var a &#x3D; 1;</span><br></pre></td></tr></table></figure><br> 实际上是执行：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a;</span><br><span class="line">a &#x3D; 1;</span><br></pre></td></tr></table></figure><br> 声明变量的时候要声明类型，若不声明类型比如（b = 1;），则是创建了全局变量；JS是动态类型语言，可随时更改变量类型；</p><h4 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h4><p> <strong><em>JavaScript引擎工作方式:</em></strong><br> 先解析代码，获得所有被声明的变量，然后一行一行执行，变量的声明会被提升到头部，叫做变量提升；</p><h4 id="区块"><a href="#区块" class="headerlink" title="区块"></a>区块</h4><p> javaScript使用{}作为区块，对于var命令来说，区块不构成单独作用域；</p><h4 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h4><p> 标签（label），定位符，用于跳转到程序任意位置；</p><hr><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><h4 id="数据类型分类"><a href="#数据类型分类" class="headerlink" title="数据类型分类"></a>数据类型分类</h4><blockquote><p>number string boolean undefined null 对象 symbol(ES6新增)<br>number string boolean 属于基本数据类型；<br>undefined null 属于特殊值；<br>对象包括对象、数组、函数类型；</p></blockquote><h4 id="typeof运算符"><a href="#typeof运算符" class="headerlink" title="typeof运算符"></a>typeof运算符</h4><blockquote><p>typeof 123   结果：number<br>typeof ‘123’   结果：string<br>typeof false   结果：boolean<br>typeof undefined   结果：undefined<br>typeof []   结果：object<br>typeof {}   结果：object<br>typeof null   结果：object<br>有上述可见：typeof可以区分出基本数据类型，但无法区分出object和null类型；</p></blockquote><h4 id="null和undefined"><a href="#null和undefined" class="headerlink" title="null和undefined"></a>null和undefined</h4><p>null == undefined  结果是true<br>null === undefined  结果是false<br>区别是null转为数值是0，而undefined转为数值是NaN；</p><h4 id="boolean"><a href="#boolean" class="headerlink" title="boolean"></a>boolean</h4><p>undefined、null、false、0、NAN、“”或者’’ 转为boolean是false，其他都为true，包括空数组和空对象；</p><h3 id="数值类型"><a href="#数值类型" class="headerlink" title="数值类型"></a>数值类型</h3><h4 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h4><blockquote><p>JavaScript内部所有数字都是以浮点数存储的，底层根本没有整数，所有数字都是小数；整数运算时，会吧64位浮点数转为32位整数再进行计算；<br>例如：<br>1 === 1.0  结果为true<br>1 + 2 === 3.0 结果为true</p></blockquote><h4 id="浮点型"><a href="#浮点型" class="headerlink" title="浮点型"></a>浮点型</h4><blockquote><p>浮点数不是精确值<br>0.1 + 0.2 === 0.3  结果为false</p></blockquote><h4 id="NAN"><a href="#NAN" class="headerlink" title="NAN"></a>NAN</h4><p>typeof NAN  结果为number<br>5 - ‘1’  结果为4<br>5 - ‘x’  结果为NAN<br>NAN不等于任何值，包括它本身；</p><h4 id="parseInt"><a href="#parseInt" class="headerlink" title="parseInt"></a>parseInt</h4><p>parseInt(‘123’)<br>parseInt(‘  123’)<br>parseInt(1.23)<br>parseInt(‘8a’)<br>parseInt(‘abc’)<br>parseInt(‘’)<br>parseInt(‘1000’, 2)<br>parseInt(‘10’, 1)<br>parseInt(‘10’, 0)<br>parseInt(‘1546’,2)   </p><p>结果分别是：</p><p>123<br>123<br>1<br>8<br>NaN<br>NaN<br>8<br>NaN<br>10<br>1</p><h4 id="parseFloat"><a href="#parseFloat" class="headerlink" title="parseFloat"></a>parseFloat</h4><p>parseFloat(‘3.14’)  3.14<br>parseFloat([])   NaN<br>parseFloat(‘’)   NaN</p><p><a href="https://wangdoc.com/javascript/" target="_blank" rel="noopener">参考资料</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;基本语法&quot;&gt;&lt;a href=&quot;#基本语法&quot; class=&quot;headerlink&quot; title=&quot;基本语法&quot;&gt;&lt;/a&gt;基本语法&lt;/h3&gt;&lt;h4 id=&quot;变量&quot;&gt;&lt;a href=&quot;#变量&quot; class=&quot;headerlink&quot; title=&quot;变量&quot;&gt;&lt;/a&gt;变量&lt;/h
+      
+    
+    </summary>
+    
+    
+      <category term="前端开发" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
+    
+  </entry>
   
   <entry>
     <title>sass、less、stylus总结</title>
