@@ -17,21 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>iOS项目开发总结 | 兜里没糖</title>
-  <meta name="description" content="iOS项目创建项目配置 配置AppIcon和LaunchImage AppIcon: 生成器：App Icon Gear  LaunchScreen: 1.在LaunchScreen.storyboard中拖拽imageView并设置约束，取消勾选右侧Use as launch Screen。 2.置空路径Launch Screen File。 3.最后在工程 targets–Build Sett">
+  <title>WebView交互 | 兜里没糖</title>
+  <meta name="description" content="WKWebView与UIWebViewUIWebView在iOS2就推出了，iOS7以前JS对OC的回调都是基于URL的拦截进行的操作，OC调用JS方法在UIWebView本身提供API：stringByEvaluatingJavaScriptFromString；WKWebView是Apple在iOS8推出的Webkit框架中的负责网页的渲染与展示的类，相比UIWebView速度更快，占用内存更">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS项目开发总结">
-<meta property="og:url" content="http://yoursite.com/2019/12/30/iOS%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:title" content="WebView交互">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/WebView%E4%BA%A4%E4%BA%92/index.html">
 <meta property="og:site_name" content="兜里没糖">
-<meta property="og:description" content="iOS项目创建项目配置 配置AppIcon和LaunchImage AppIcon: 生成器：App Icon Gear  LaunchScreen: 1.在LaunchScreen.storyboard中拖拽imageView并设置约束，取消勾选右侧Use as launch Screen。 2.置空路径Launch Screen File。 3.最后在工程 targets–Build Sett">
+<meta property="og:description" content="WKWebView与UIWebViewUIWebView在iOS2就推出了，iOS7以前JS对OC的回调都是基于URL的拦截进行的操作，OC调用JS方法在UIWebView本身提供API：stringByEvaluatingJavaScriptFromString；WKWebView是Apple在iOS8推出的Webkit框架中的负责网页的渲染与展示的类，相比UIWebView速度更快，占用内存更">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2019-12-29T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-03-17T16:51:30.460Z">
+<meta property="article:published_time" content="2020-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-03-20T16:18:53.220Z">
 <meta property="article:author" content="aliya">
-<meta property="article:tag" content="项目配置">
+<meta property="article:tag" content="JS与OC互调">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://yoursite.com/2019/12/30/iOS%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/index.html">
+  <link rel="canonical" href="http://yoursite.com/2020/03/20/WebView%E4%BA%A4%E4%BA%92/index.html">
   
     <link rel="alternate" href="/atom.xml" title="兜里没糖" type="application/atom+xml">
   
@@ -310,14 +310,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-iOS项目开发总结" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-WebView交互" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      iOS项目开发总结
+      WebView交互
     </h1>
   
 
@@ -325,58 +325,56 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2019/12/30/iOS%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/" class="article-date">
-	  <time datetime="2019-12-29T16:00:00.000Z" itemprop="datePublished">2019-12-30</time>
+	<a href="/2020/03/20/WebView%E4%BA%A4%E4%BA%92/" class="article-date">
+	  <time datetime="2020-03-19T16:00:00.000Z" itemprop="datePublished">2020-03-20</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+    <a class="article-category-link" href="/categories/WebView/">WebView</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE/" rel="tag">项目配置</a>
+	<a class="article-tag-link" href="/tags/JS%E4%B8%8EOC%E4%BA%92%E8%B0%83/" rel="tag">JS与OC互调</a>
   </span>
 
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/12/30/iOS%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/03/20/WebView%E4%BA%A4%E4%BA%92/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h3 id="iOS项目创建"><a href="#iOS项目创建" class="headerlink" title="iOS项目创建"></a>iOS项目创建</h3><h4 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h4><hr>
-<h4 id="配置AppIcon和LaunchImage"><a href="#配置AppIcon和LaunchImage" class="headerlink" title="配置AppIcon和LaunchImage"></a>配置AppIcon和LaunchImage</h4><p> <strong><em>AppIcon:</em></strong><br> 生成器：App Icon Gear</p>
-<p> <strong><em>LaunchScreen:</em></strong><br> 1.在LaunchScreen.storyboard中拖拽imageView并设置约束，取消勾选右侧Use as launch Screen。<br> 2.置空路径Launch Screen File。<br> 3.最后在工程 targets–Build Settings 搜索 Asset Catalog Launch Image Set Name 然后设置Launch Image 就可以了。<br> 从2020年4月开始，使⽤ iOS13 SDK 的 App 将必须提供 LaunchScreen，而LaunchImage将退出历史的舞台，说明以后启动页要通过LaunchScreen来设置了。</p>
+        <h3 id="WKWebView与UIWebView"><a href="#WKWebView与UIWebView" class="headerlink" title="WKWebView与UIWebView"></a>WKWebView与UIWebView</h3><p>UIWebView在iOS2就推出了，iOS7以前JS对OC的回调都是基于URL的拦截进行的操作，OC调用JS方法在UIWebView本身提供API：stringByEvaluatingJavaScriptFromString；<br>WKWebView是Apple在iOS8推出的Webkit框架中的负责网页的渲染与展示的类，相比UIWebView速度更快，占用内存更少，支持更多的HTML特性。WKWebView只支持代码创建。</p>
+<h3 id="JS与OC互调"><a href="#JS与OC互调" class="headerlink" title="JS与OC互调"></a>JS与OC互调</h3><h4 id="拦截URL方式、URL劫持-WebViewJavascriptBridge"><a href="#拦截URL方式、URL劫持-WebViewJavascriptBridge" class="headerlink" title="拦截URL方式、URL劫持 (WebViewJavascriptBridge)"></a>拦截URL方式、URL劫持 (WebViewJavascriptBridge)</h4><p>在iOS7之前， Web页面和原生代码之间的一个桥梁就是WebViewJavascriptBridge，用来传输一些数据和方法的调用。WebViewJavascriptBridge的原理是iOS与前端首先定好一个scheme（scheme://<strong>BRIDGE_LOADED</strong>），加载一个特定标识的URL时，在UIWebView的代理方法shouldStartLoadWithRequest拦截URL；通过UIWebView的 stringByEvaluatingJavaScriptFromString方法执行js。<br>在WKWebView中也支持使用拦截的方式来做方法的调用，只是WKWebView是在decidePolicyForNavigationAction的代理方法中拦截URL；</p>
+<h5 id="OC调用JS"><a href="#OC调用JS" class="headerlink" title="OC调用JS"></a>OC调用JS</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[webView stringByEvaluatingJavaScriptFromString:@&quot;OCToJS(&#39;OC拦截到了我&#39;)&quot;];</span><br></pre></td></tr></table></figure>
+
+<h5 id="JS调用OC"><a href="#JS调用OC" class="headerlink" title="JS调用OC"></a>JS调用OC</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType &#123;</span><br><span class="line">    </span><br><span class="line">    NSString *requestString &#x3D; [[[request URL] absoluteString]stringByRemovingPercentEncoding];</span><br><span class="line">    &#x2F;&#x2F; 拦截url</span><br><span class="line">    if ([requestString hasSuffix:@&quot;js_native:&#x2F;&#x2F;jsToOC&quot;]) &#123;</span><br><span class="line">        &#x2F;&#x2F; oc调用js方法</span><br><span class="line">        [webView stringByEvaluatingJavaScriptFromString:@&quot;OCToJS(&#39;OC拦截到了我&#39;)&quot;];</span><br><span class="line">        return NO;</span><br><span class="line">    &#125;</span><br><span class="line">    return YES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- js调用oc --&gt;</span><br><span class="line">&lt;button onClick&#x3D;&quot;JSToOC()&quot;&gt;JS调用OC方法&lt;&#x2F;button&gt;</span><br><span class="line">&#x2F;&#x2F; js调用oc</span><br><span class="line">function JSToOC() &#123;</span><br><span class="line">    window.location.href &#x3D; &quot;js_native:&#x2F;&#x2F;jsToOC&quot;;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; oc调用js</span><br><span class="line">function OCToJS(param) &#123;</span><br><span class="line">    alert(param)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="JavaScriptCore"><a href="#JavaScriptCore" class="headerlink" title="JavaScriptCore"></a>JavaScriptCore</h4><p>JavaScriptCore是从iOS7开始加入的，用Objective-C把WebKit的JavaScript引擎封装了一下，提供了简单快捷的方式与JavaScript交互。使用到的框架是：JavaScriptCore.framework。</p>
+<h5 id="OC调用JS-1"><a href="#OC调用JS-1" class="headerlink" title="OC调用JS"></a>OC调用JS</h5><p>提供了两种方式：<strong>evaluateScript</strong>、<strong>callWithArguments</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- oc代码 --&gt;</span><br><span class="line">- (void)webViewDidFinishLoad:(UIWebView *)webView &#123;</span><br><span class="line">    JSContext *context &#x3D; [self.webView valueForKeyPath:@&quot;documentView.webView.mainFrame.javaScriptContext&quot;];</span><br><span class="line">    &#x2F;* OC调用JS *&#x2F;</span><br><span class="line">    &#x2F;&#x2F; 第一种方式：evaluateScript</span><br><span class="line">    [context evaluateScript:@&quot;OCToJS(&#39;evaluateScript&#39;)&quot;];</span><br><span class="line">    &#x2F;&#x2F; 第二种方式：callWithArguments</span><br><span class="line">    [context[@&quot;OCToJS&quot;] callWithArguments:@[@&quot;callWithArguments&quot;]];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- js代码 oc调用js --&gt;</span><br><span class="line">function OCToJS(param) &#123;</span><br><span class="line">    alert(param);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="JS调用OC-1"><a href="#JS调用OC-1" class="headerlink" title="JS调用OC"></a>JS调用OC</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- js代码 js调用oc --&gt;</span><br><span class="line">&lt;button onClick&#x3D;&quot;JSToOC(&#39;success&#39;)&quot;&gt;JS调用OC方法&lt;&#x2F;button&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- oc代码 --&gt;</span><br><span class="line">- (void)webViewDidFinishLoad:(UIWebView *)webView &#123;</span><br><span class="line">    JSContext *context &#x3D; [self.webView valueForKeyPath:@&quot;documentView.webView.mainFrame.javaScriptContext&quot;];</span><br><span class="line">    &#x2F;* JS调用OC *&#x2F;</span><br><span class="line">    context[@&quot;JSToOC&quot;] &#x3D; ^() &#123;</span><br><span class="line">        NSArray *args &#x3D; [JSContext currentArguments];</span><br><span class="line">        for (id obj in args) &#123;</span><br><span class="line">            NSLog(@&quot;%@&quot;,obj);   &#x2F;&#x2F; success</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="WKWebView-WKScriptMessageHandler"><a href="#WKWebView-WKScriptMessageHandler" class="headerlink" title="WKWebView (WKScriptMessageHandler)"></a>WKWebView (WKScriptMessageHandler)</h4><p>在 WKWebView 中不支持获取 JavascriptCore，但是其提供了一套 Message Handler 协议的方式来进行客户端与 JS 的通信; WebKit的库中有个代理WKScriptMessageHandler就是专门来做交互的。WKScriptMessageHandler其实就是一个遵循的协议，它能让网页通过JS把消息发送给OC。</p>
+<h5 id="OC调用JS-2"><a href="#OC调用JS-2" class="headerlink" title="OC调用JS"></a>OC调用JS</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation &#123;</span><br><span class="line">    [self.webView evaluateJavaScript:@&quot;OCToJS(&#39;OC发送了方法&#39;)&quot;</span><br><span class="line">                completionHandler:^(id _Nullable ret, NSError * _Nullable error) &#123;</span><br><span class="line">        NSLog(@&quot;%@&quot;,ret);</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; oc调用js</span><br><span class="line">function OCToJS(param) &#123;</span><br><span class="line">    let res &#x3D; &#39;JS接受到了:&#39;+param</span><br><span class="line">    return res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="JS调用OC-2"><a href="#JS调用OC-2" class="headerlink" title="JS调用OC"></a>JS调用OC</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- js代码 --&gt;</span><br><span class="line">window.webkit.messageHandlers.jsCallOC.postMessage(&#123;&#39;name&#39;:&#39;yilan&#39;,&#39;id&#39;:&#39;1&#39;&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- oc代码 --&gt;</span><br><span class="line">#pragma mark - WKWebView懒加载</span><br><span class="line">- (WKWebView *)webView &#123;</span><br><span class="line">    if (!_webView) &#123;</span><br><span class="line">        WKWebViewConfiguration *configuration &#x3D; [[WKWebViewConfiguration alloc] init];</span><br><span class="line">        configuration.userContentController &#x3D; [[WKUserContentController alloc]init];</span><br><span class="line">        [configuration.userContentController addScriptMessageHandler:self name:@&quot;jsCallOC&quot;];</span><br><span class="line">        </span><br><span class="line">        _webView &#x3D; [[WKWebView alloc]initWithFrame:CGRectZero configuration:configuration];</span><br><span class="line">        _webView.navigationDelegate &#x3D; self;</span><br><span class="line">        _webView.UIDelegate &#x3D; self;</span><br><span class="line">    &#125;</span><br><span class="line">    return _webView;</span><br><span class="line">&#125;</span><br><span class="line">#pragma mark - WKScriptMessageHandler</span><br><span class="line">- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message</span><br><span class="line">&#123;</span><br><span class="line">    NSString *methods &#x3D; [NSString stringWithFormat:@&quot;%@:&quot;, message.name];</span><br><span class="line">    if ([methods isEqualToString:@&quot;jsCallOC:&quot;]) &#123;</span><br><span class="line">        NSLog(@&quot;执行jsCallOC %@ %@&quot;, message.body[@&quot;name&quot;], message.body[@&quot;id&quot;]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>github上提供了一个简单的demo实例，有需要的可以查看：<a href="https://github.com/kindlymental/JS_Native" target="_blank" rel="noopener">Demo实例</a></p>
 <hr>
-<h4 id="获取其他APP的图片"><a href="#获取其他APP的图片" class="headerlink" title="获取其他APP的图片"></a>获取其他APP的图片</h4><p> 如果我们手中没有UI素材，可以使用其他APP的图片做测试，这时需要使用到以下的工具：</p>
-<ul>
-<li><p><em>Apple Configurator工具</em></p>
-</li>
-<li><p><em>Cartool工具</em></p>
-<blockquote>
-<p><strong>Apple Configurator工具</strong></p>
-</blockquote>
-</li>
-</ul>
-<p> <em>文件目录：<br> ~/Library/Group Containers/K36BKF7T3D.group.com.apple.configurator/Library/Caches/Assets/TemporaryItems/MobileApps/</em></p>
-<blockquote>
-<p><strong>Cartool工具</strong><br> <em><a href="https://github.com/yuedong56/Assets.carTool" target="_blank" rel="noopener">CarTool工具 解压Assets.car文件</a></em></p>
-</blockquote>
-<h3 id="书写规范"><a href="#书写规范" class="headerlink" title="书写规范"></a>书写规范</h3><h4 id="视图创建"><a href="#视图创建" class="headerlink" title="视图创建"></a>视图创建</h4><blockquote>
-<p><strong>xib里 file’s owner class 与 custom class 的区别</strong><br>xib文件本身可以看做是一个xml，app启动的时候会根据xml构造xib对应的界面及其控件，file’s owner 可以看做是xib对应的类，连接outlet控件需要设置；<br>custom class的作用：view本身是UIView, 在代码中使用时, 要使用指定的类型方法, 需要设置custom class为某类型；</p>
-</blockquote>
-<h4 id="iOS报错问题总结"><a href="#iOS报错问题总结" class="headerlink" title="iOS报错问题总结"></a>iOS报错问题总结</h4><blockquote>
-<p><strong>真机调试报错：dyld: Library not loaded: @rpath/Bagel.framework/Bagel</strong><br>真机需要将有问题的framework直接引用，在targets-&gt;Build Phases -&gt;Link Binary With Libraries 中添加的第三方库，针对有问题的framework，把status选成optional。<br><strong>iOS真机调试错误Reason: no suitable image found. Did find:</strong><br>删除APP重新安装，因为你的证书在上一次安装到现在安装失败这段时间里证书被重置过，两次的签名不一样，而Bundle identifier ID又是同一个，所以安装会失败。</p>
-</blockquote>
-<blockquote>
-<p><strong>iOS清除缓存命令</strong><br>rm -rf “$(getconf DARWIN_USER_CACHE_DIR)/org.llvm.clang/ModuleCache”<br>rm -rf ~/Library/Developer/Xcode/DerivedData<br>rm -rf ~/Library/Caches/com.apple.dt.Xcode</p>
-</blockquote>
+<p><a href="https://imciel.com/2016/06/18/oc-js-communication/" target="_blank" rel="noopener">参考资料</a><br><a href="https://75.team/post/ios-webview-and-js.html" target="_blank" rel="noopener">参考资料</a><br><a href="https://juejin.im/post/5d71fd92f265da03ce39fab8" target="_blank" rel="noopener">参考资料</a></p>
 
       
     </div>
@@ -386,7 +384,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://yoursite.com/2019/12/30/iOS%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/" title="iOS项目开发总结" target="_blank" rel="external">http://yoursite.com/2019/12/30/iOS%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/</a>
+      <a href="http://yoursite.com/2020/03/20/WebView%E4%BA%A4%E4%BA%92/" title="WebView交互" target="_blank" rel="external">http://yoursite.com/2020/03/20/WebView%E4%BA%A4%E4%BA%92/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -432,13 +430,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2019/12/30/Texture/" title="Texture"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/2019/12/23/iOS13%E9%80%82%E9%85%8D/" title="iOS13适配"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2020/02/27/iOS%E7%9A%84%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C%E5%90%8C%E6%AD%A5%E6%89%A7%E8%A1%8C/" title="iOS中的多线程和异步操作实现同步执行"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
