@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-04-05T17:11:34.830Z</updated>
+  <updated>2020-04-12T02:57:36.690Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://yoursite.com/2020/04/05/Flutter%E8%B8%A9%E5%9D%91/"/>
     <id>http://yoursite.com/2020/04/05/Flutter%E8%B8%A9%E5%9D%91/</id>
     <published>2020-04-04T16:00:00.000Z</published>
-    <updated>2020-04-05T17:11:34.830Z</updated>
+    <updated>2020-04-12T02:57:36.690Z</updated>
     
-    <content type="html"><![CDATA[<ol><li>More than one file was found with OS independent path ‘META-INF/proguard/androidx-annotations.pro’<br>解决：在app下build.gradle文件中的android{}下添加：<br>packagingOptions {<br>exclude ‘META-INF/proguard/androidx-annotations.pro’<br>}</li><li>adb devices命令不存在<br>解决：需要在bash_profile中配置路径，如果终端使用的shell是zsh，则修改对应zsh的配置文件；(切换bash命令：chsh -s /bin/zsh 或 chsh -s /bin/bash)<br>配置路径：<br>// android<br>export ANDROID_HOME=本地Android SDK路径（例如：/Users/***/Library/Android/sdk）<br>export PATH=${PATH}:${ANDROID_HOME}/tools<br>export PATH=${PATH}:${ANDROID_HOME}/platform-tools</li><li>Android Studio开启无线调试<br>前提：手机和电脑在同一局域网中；<br>1、终端使用adb devices判断设备是否连接成功，如果连接成功;<br>2、为设备设置一个Tcp/Ip 的侦听端口(adb tcpip 8889);如果成功侦听，终端会返回：restarting in TCP mode port: 8889;<br>3、查看手机的网络IP地址；例如：(192 .168.0.110);<br>4、连接手机的IP和端口：adb connect 192.168.0.110:8889;如果成功连接，终端会返回：already connected to 192.168.0.110:8889;<br>5、通过adb devices查看是否连接成功;<br>6、如果要断开某手机连接：adb disconnect 192.168.0.110:8889;</li></ol>]]></content>
+    <content type="html"><![CDATA[<ol><li>More than one file was found with OS independent path ‘META-INF/proguard/androidx-annotations.pro’<br>解决：在app下build.gradle文件中的android{}下添加：<br>packagingOptions {<br>exclude ‘META-INF/proguard/androidx-annotations.pro’<br>}</li><li>adb devices命令不存在<br>解决：需要在bash_profile中配置路径，如果终端使用的shell是zsh，则修改对应zsh的配置文件；(切换bash命令：chsh -s /bin/zsh 或 chsh -s /bin/bash)<br>配置路径：<br>// android<br>export ANDROID_HOME=本地Android SDK路径（例如：/Users/***/Library/Android/sdk）<br>export PATH=${PATH}:${ANDROID_HOME}/tools<br>export PATH=${PATH}:${ANDROID_HOME}/platform-tools</li><li>Android Studio开启无线调试<br>前提：手机和电脑在同一局域网中；<br>1、终端使用adb devices判断设备是否连接成功，如果连接成功;<br>2、为设备设置一个Tcp/Ip 的侦听端口(adb tcpip 8889);如果成功侦听，终端会返回：restarting in TCP mode port: 8889;<br>3、查看手机的网络IP地址；例如：(192.168.0.110);<br>4、连接手机的IP和端口：adb connect 192.168.0.110:8889;如果成功连接，终端会返回：already connected to 192.168.0.110:8889;<br>5、通过adb devices查看是否连接成功;<br>6、如果要断开某手机连接：adb disconnect 192.168.0.110:8889;</li><li>Flutter doctor<br>提示：Android license status unknown<br>解决：/Users/用户名/Library/Android/sdk/tools/bin/sdkmanager –update<br>报错：Warning: Could not create settings  java.lang.IllegalArgumentException<br>解决：brew install maven</li></ol>]]></content>
     
     <summary type="html">
     
